@@ -1,5 +1,10 @@
 from django.contrib import admin
-from polls.models import Question
+from polls.models import Choice, Question
+
+
+class ChoiceInline(admin.TabularInline):
+    model = Choice
+    extra = 3
 
 
 class QuestionAdmin(admin.ModelAdmin):
@@ -10,6 +15,7 @@ class QuestionAdmin(admin.ModelAdmin):
             'classes': ['collapse']
         }),
     ]
+    inlines = [ChoiceInline]
 
 
 admin.site.register(Question, QuestionAdmin)
